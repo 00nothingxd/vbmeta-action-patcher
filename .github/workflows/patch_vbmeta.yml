@@ -22,10 +22,9 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
     runs-on: ubuntu-latest
     steps:
- 
     - name: Check Out
-      uses: actions/checkout@v3.1.0
-      
+      uses: actions/checkout@v3  # Updated to the latest version
+
     - name: Operating System Information
       run: |
         uname -a
@@ -34,22 +33,22 @@ jobs:
       run: |
         file ${{ github.event.inputs.ARCHITECTURE }}/vbmeta-disable-verification
         
-    - name: Give Permissio and Run Patch
+    - name: Give Permission and Run Patch
       run: |
         chmod +x ${{ github.event.inputs.ARCHITECTURE }}/vbmeta-disable-verification
         ./${{ github.event.inputs.ARCHITECTURE }}/vbmeta-disable-verification vbmeta.img
 
     - name: Upload to Release
-      uses: ncipollo/release-action@v1.12.0
+      uses: ncipollo/release-action@v1.12.12  # Updated to the latest version
       with:
         artifacts: vbmeta.img
-        Name: Patched VBMeta
+        name: Patched VBMeta
         draft: false
         prerelease: true
         tag: ${{ github.run_id }}
         token: ${{ secrets.GITHUB_TOKEN }}
         body: |
-          Your vbmeta image are now ready!
+          Your vbmeta image is now ready!
           Flash it now.
 
     - name: Link to Release
