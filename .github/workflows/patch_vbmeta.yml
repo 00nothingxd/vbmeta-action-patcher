@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check Out
-      uses: actions/checkout@v3  # Updated to the latest version
+      uses: actions/checkout@v3  # This will run on Node.js 20
 
     - name: Operating System Information
       run: |
@@ -39,7 +39,7 @@ jobs:
         ./${{ github.event.inputs.ARCHITECTURE }}/vbmeta-disable-verification vbmeta.img
 
     - name: Upload to Release
-      uses: ncipollo/release-action@v1.12.0  # Use the correct version
+      uses: ncipollo/release-action@v1.12.0  # Ensure this action is compatible with Node.js 20
       with:
         artifacts: vbmeta.img
         name: Patched VBMeta
